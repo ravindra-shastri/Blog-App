@@ -1,13 +1,252 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:rgb(237, 237, 237);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.header {
+  /* width: 100%; */
+  color: white;
+  background-color: rgb(107,185,92);
+  font-size:2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 1.8rem;
+}
+.header-span{
+  font-size:1.1rem;
+  font-weight: 200;
+  color: rgb(223, 223, 223);
+}
+.header-nav-content{
+  display:flex;
+  justify-content:space-around
+}
+.header-nav-btn{
+  border:none;
+  background-color:rgb(237,237,237);
+  color:rgb(165, 165, 165);
+}
+.header-nav-btn:hover{
+  color:rgb(87, 86, 86);
+}
+.logo{
+  font-size:1.4rem;
+  font-weight:900;
+  color:rgb(89, 151, 75);
+}
+.header-btn {
+  text-align: center;
+
+}
+.article-tag-container{
+  display: flex;
+}
+.article-display-card{
+  width:80%;
+}
+.feed{
+  display: inline;
+  font-size: .7rem;
+  font-weight:300;
+  color:rgb(43, 147, 43);
+  margin-left:16rem;
+  border-bottom: 2px solid rgb(40, 123, 40);
+}
+.feed-hr-line{
+  width:55rem;
+  margin-left: 16rem;
+}
+/* .btn-primary {
+  background-color: darkblue;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1rem 4rem;
+  border-radius: 3rem;
+  border: none;
+} */
+.author-container{
+margin: 0 16rem;
+}
+.author-img-container{
+  display:flex;
+  justify-content:space-between;
+}
+.author-img-content,.read-more-content{
+  display:flex;
+}
+.author-img-content,.author-description-btn{
+  border: none;
+}
+.author-img{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+.author-name{
+  font-size:1rem;
+  font-weight: 300;
+  color: green;
+  margin-left: .4rem;
+}
+.article-date{
+  font-size:.6rem;
+  color: rgb(160, 158, 158);
+  margin-left: .4rem;
+}
+.like{
+  margin-left: 45.8rem;
+}
+.like-icon:hover{
+  background-color:rgb(85, 211, 85);
+  color: white;
+}
+.like-icon{
+  font-size:.7rem;
+  border:1px solid rgb(85, 211, 85);
+  color:rgb(76, 197, 76);
+  border-radius: .4rem ;
+  padding: .4rem .7rem;
+}
+.author-title{
+  font-size:1.2rem;
+  font-weight: 600;
+  color: rgb(57, 57, 57);
+  
+}
+.author-desc{
+  text-align: left;
+}
+.author-description{
+  font-size:.8rem;
+  color: rgb(160, 160, 160);
+}
+.read-more-btn{
+  font-size: .6rem;
+  border: none;
+  color: grey;
+}
+.read-more-link{
+  text-decoration: none;
+}
+.taglist{
+  color:grey;
+  margin-left: 30rem;
+}
+.hr-line{
+  width:55rem;
+  margin-right: 18rem;
+}
+.form-signin,.form-signup{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+}
+.signin-header,.signup-header{
+  text-align: center;
+}
+.signup-btn{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: row;
+}
+.article-page{
+  display:flex;
+  justify-content:center;
+  flex-wrap: wrap;
+  margin-right: 15.7rem;
+}
+.active{
+  background-color: rgb(62, 180, 62);
+  color: white;
+  border:.01px solid rgb(197, 197, 197);
+  padding: .2rem .4rem;
+}
+.page{
+  /* background-color:rgb(107,185,92); */
+  border:.01px solid rgb(197, 197, 197);
+  color:rgb(62, 180, 62);
+  padding: .2rem .4rem;
+  /* border-radius: 0.4rem; */
+}
+.tag-main-container{
+  background-color: rgb(223, 223, 223);
+  border-radius: .2rem;
+  margin-top: -2.5rem;
+}
+.tag-container{
+  width:13rem;
+  display:flex;
+  padding: .5rem;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+.tag{
+  font-size:.7rem;
+  font-weight: 200;
+  background-color: grey;
+  color:white;
+  border-radius: .6rem;
+  border: none;
+  margin: .2rem;
+  padding: .2rem .3rem;
+}
+.tag-title{
+  font-size: 1rem;
+  font-weight: 200;
+  margin-bottom:none;
+  padding: .6rem;
+}
+.page-btn{
+  color:rgb(0, 158, 0);
+  border-color: greenyellow;
+}
+.page-container{
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+.prev-btn,.next-btn{
+  color:green;
+  margin-bottom: 1rem;
+  margin: 0 1rem;
+}
+.article-header{
+  background-color:black;
+  
+}
+.article-author-name{
+color: white;
+}
+.profile-header{
+  margin: 2rem;
+  padding:1rem 0;
+  text-align:center;
+  background-color:rgb(204, 204, 204);
+}
+.profile-img{
+  width: 8rem;
+  height: 8rwm;
+  border-radius: 50%;
+}
+.profile-bio{
+color: grey;
+font-weight:200;
+}
+.profile-follow-btn{
+  text-align:right;
+  margin: 2rem;
 }
