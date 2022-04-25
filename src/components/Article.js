@@ -47,9 +47,9 @@ export default class Article extends React.Component {
       <>
         <div>
           <div className="author-container">
-            <div className="">
+            <div>
               <header className="article-header">
-                <div>
+                <div className="article-header-content">
                   <h2 className="article-author-name">
                     {article.title}
                   </h2>
@@ -64,29 +64,31 @@ export default class Article extends React.Component {
                           />
                         </div>
                         <div>
-                          <Link to={`/profile/${article.author.username}`}>
+                          <Link className="link" to={`/profile/${article.author.username}`}>
                             <h2 className="author-name">
                               {article.author.username}
                             </h2>
                           </Link>
                           <p className="article-date">
-                            {/* {this.getDate(article.createdAt)} */}
+                            {this.getDate(article.createdAt)}
                           </p>
                         </div>
                       </div>
-                      : <></>
+                      : ""
                   }
-
                 </div>
               </header>
-              <div>
-                <p> {article.body} </p>
+              <div className="article-header-content">
+                <div>
+                  <p> {article.body} </p>
+                </div>
+                <div>
+                  <p className="art-taglist">
+                    {article.tagList}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="taglist">
-                  {article.tagList}
-                </p>
-              </div>
+
               <hr className="hr-line" />
             </div>
           </div>

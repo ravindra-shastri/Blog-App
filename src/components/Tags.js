@@ -23,13 +23,16 @@ export default class Tags extends React.Component {
         this.setState({ tags: tags, error: "" });
       })
       .catch((err) => {
-        this.setState({ error: "Not able to fetch data" });
+        this.setState({ error: "Not able to fetch Tags" });
       });
   }
 
   selectTag = (tag) => {
-    console.log(tag)
-    this.setState({ selectedtags: tag }, () => this.props.getArticles({ tag }))
+    // console.log(tag)
+    this.setState({ selectedtags: tag }, () => {
+      this.props.getArticles({ tag });
+      this.props.selectedTag(tag)
+    })
   }
 
   render() {
