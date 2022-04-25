@@ -9,6 +9,7 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount() {
+    // fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/:username`)
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles`)
       .then((res) => res.json())
       .then(({ articles, articlesCount }) => this.setState({ articles, articlesCount }))
@@ -26,8 +27,8 @@ export default class Profile extends React.Component {
                 <h4 className="profile-bio"> {article.author.bio} </h4>
                 <div className="profile-follow-btn">
                   <button>
-                    <i className={!article.author.following ?  "fas fa-plus"   : "fas fa-minus"}></i> 
-                     {!article.author.following ? "Follow" : "Unfollow"} {article.author.username}
+                    <i className={!article.author.following ? "fas fa-plus" : "fas fa-minus"}></i>
+                    {!article.author.following ? "Follow" : "Unfollow"} {article.author.username}
                   </button>
                 </div>
               </div>

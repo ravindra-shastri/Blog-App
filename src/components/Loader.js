@@ -1,6 +1,7 @@
-// import '../stylesheets/loader.css';
+import React from 'react';
+import "../loader.css";
 
-function Loader() {
+export default function Loader() {
   return (
     <div className="">
       <div className="lds-grid">
@@ -17,4 +18,5 @@ function Loader() {
     </div>
   );
 }
-export default Loader;
+
+

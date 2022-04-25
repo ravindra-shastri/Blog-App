@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink as Link } from 'react-router-dom';
 
 export default class Header extends React.Component {
   render() {
@@ -7,23 +7,23 @@ export default class Header extends React.Component {
       <>
         <div>
           <header className="header-nav-content">
-            <nav>
+            <Link to="/">
               <button className="header-nav-btn logo"> Blog</button>
-            </nav>
+            </Link>
             <nav>
               <Link to="/">
                 <button className="header-nav-btn">
                   Home
                 </button>
               </Link>
-              <Link to="/signin">
-                <button className="header-nav-btn">
-                  Sign in
-                </button>
-              </Link>
-              <Link to="/signup">
+              <Link to="/signup" exact>
                 <button className="header-nav-btn">
                   Sign up
+                </button>
+              </Link>
+              <Link to="/login" exact>
+                <button className="header-nav-btn">
+                  Login
                 </button>
               </Link>
             </nav>

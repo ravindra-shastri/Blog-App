@@ -2,6 +2,7 @@ import React from 'react';
 import Tags from "../components/Tags";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
+// import {Route,Redirect} from 'react-router-dom';
 
 const LIMIT = 10;
 
@@ -11,7 +12,8 @@ export default class Home extends React.Component {
     this.state = {
       articles: [],
       articlesCount: 0,
-      activePage: 1
+      activePage: 1,
+      activetag: "Node"
     }
   }
 
@@ -38,22 +40,36 @@ export default class Home extends React.Component {
     }, this.getArticles)
   }
 
-  render() {
+  removeTag = () => {
+    this.setState({ activetag: "" })
+  }
+  selectedTag = activetag => this.setState({ activetag })
 
+  render() {
     return (
       <>
         <div className="article-tag-container">
           <div className="article-display-card">
-            <div>
-              <h6 className="feed"> Global Feed</h6>
+            <div className="feed-card">
+              <h6 onClick={() => this.removeTag}>
+                <Link className="feed" to="/">
+                  Global Feed
+                </Link>
+              </h6>
+              {this.state.activetag && (
+                <h6>
+                  <Link className="feed" to="/">
+                    # {this.state.activetag}
+                  </Link>
+                </h6>
+              )}
             </div>
             <hr className="feed-hr-line" />
-
             {this.state.articles.map((article) =>
               <div className="author-container">
                 <div className="author-img-container">
                   <div>
-                    <Link to={`/profile/${article.author.username}`}>
+                    <Link className="link" to={`/profile/${article.author.username}`}>
                       <button className="author-img-content">
                         <div>
                           <img
@@ -62,8 +78,8 @@ export default class Home extends React.Component {
                             alt="author"
                           />
                         </div>
-                        <div>
-                          <h2 className="author-name">
+                        <div className="author-name-date">
+                          <h2 className="home-author-name">
                             {article.author.username}
                           </h2>
                           <p className="article-date">
@@ -78,7 +94,7 @@ export default class Home extends React.Component {
                     </i>
                   </p>
                 </div>
-                <Link to={`/articles/${article.slug}`}>
+                <Link className="link" to={`/articles/${article.slug}`}>
                   <button className="author-description-btn">
                     <div className="author-desc">
                       <h2 className="author-title">
@@ -89,7 +105,7 @@ export default class Home extends React.Component {
                       </p>
                     </div>
                     <div className="read-more-content">
-                      {/* <Link className="read-more-link" to="/articles"> */}
+                      {/* <Link className="link" to="/articles"> */}
                       <p className="read-more-btn">
                         Read More ...
                       </p>
@@ -102,13 +118,12 @@ export default class Home extends React.Component {
                 </Link>
                 <hr className="hr-line" />
               </div>
-
             )
             }
           </div>
-          <aside>
-            <Tags getArticles={this.getArticles} />
-          </aside>
+          <div>
+            <Tags getArticles={this.getArticles} selectedTag={this.selectedTag} />
+          </div>
         </div>
 
         <ArticlePagination
@@ -123,9 +138,26 @@ export default class Home extends React.Component {
 
 
 
+// function PrivateRoute({ children, isAuthenticated, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={
+//         ({ location }) => (
+//           isAuthenticated
+//             ? (
+//               children
+//             ) : (
+//               <Redirect
+//                 to={{
+//                   pathname: '/login',
+//                   state: { from: location }
+//                 }}
+//               />
+//             ))}
+//            />
+//          );
+//         }
 
-// {/* <div className="header-btn">
-//   <Link to="/articles">
-//     <button className="btn-primary"> View Articles </button>
-//   </Link>
-// </div> */}
+
+
