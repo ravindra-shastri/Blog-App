@@ -20,7 +20,14 @@ export default class App extends React.Component {
 
   getUserDetails = () => {
     this.setState({ loading: true });
-    const { token = '' } = JSON.parse(localStorage.getItem('user')) || {};
+    let d;
+    try {
+      d = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      d = {};
+    }
+    const { token = '' } = d;
+
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/user`, {
       headers: {
         Authorization: `Token ${token}`
