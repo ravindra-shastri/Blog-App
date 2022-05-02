@@ -3,9 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Article from "./components/Article";
+import AddArticle from "./components/AddArticle";
+import Setting from "./components/Setting";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
+import Loader from "./components/Loader";
 import SignupPage from "./components/SignupPage";
 import "./index.css";
 
@@ -26,7 +29,7 @@ export default class App extends React.Component {
     } catch (e) {
       d = {};
     }
-    const { token = '' } = d;
+    const { token = '' } = d || {};
 
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/user`, {
       headers: {
@@ -35,7 +38,6 @@ export default class App extends React.Component {
     })
       .then((res) => res.json())
       .then(data => {
-        console.log(data);
         if (data.errors && window.location.pathname !== '/login') return window.location.href = '/login';
         else
           localStorage.setItem('user', JSON.stringify(data.user));
@@ -52,13 +54,15 @@ export default class App extends React.Component {
     return (
       <>
         {
-          loading ? <>Loading ... </>
+          loading ? <Loader />
             : <BrowserRouter>
               <Header />
               <Switch>
                 <Route path="/" exact component={Home}></Route>
                 <Route path="/articles" exact component={Home}></Route>
                 <Route path="/articles/:slug" exact component={Article}></Route>
+                <Route path="/addArticle" exact component={AddArticle}></Route>
+                <Route path="/setting" exact component={Setting}></Route>
                 <Route path="/profiles/:id" exact component={Profile}></Route>
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="/signup" exact component={SignupPage}></Route>

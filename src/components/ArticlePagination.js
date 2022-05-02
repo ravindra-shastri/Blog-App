@@ -25,7 +25,7 @@ export default class ArticlePagination extends React.Component {
               {"< Prev"}
             </button>
           </div>
-          <div>
+          <div className="pagination-num">
             {pagesArray.map((page, index) =>
               <span
                 key={page}

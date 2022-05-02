@@ -13,7 +13,7 @@ export default class Home extends React.Component {
       articles: [],
       articlesCount: 0,
       activePage: 1,
-      activetag: "Node"
+      activetag: ""
     }
   }
 
@@ -48,6 +48,13 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
+      
+      <div className="header-container">
+            <h2 className="header">
+              Welcome to Blog App <br />
+              <span className="header-span"> A place to share your knowledge.</span>
+            </h2>
+          </div>
         <div className="article-tag-container">
           <div className="article-display-card">
             <div className="feed-card">
@@ -69,8 +76,8 @@ export default class Home extends React.Component {
               <div className="author-container">
                 <div className="author-img-container">
                   <div>
-                    <Link className="link" to={`/profile/${article.author.username}`}>
-                      <button className="author-img-content">
+                    <Link className="link" to={`/profiles/${article.author.username}`}>
+                      <button className="author-img-content-home">
                         <div>
                           <img
                             className="author-img"
@@ -95,7 +102,7 @@ export default class Home extends React.Component {
                   </p>
                 </div>
                 <Link className="link" to={`/articles/${article.slug}`}>
-                  <button className="author-description-btn">
+                  <button className="author-description-btn-home">
                     <div className="author-desc">
                       <h2 className="author-title">
                         {article.title}
