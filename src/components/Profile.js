@@ -10,9 +10,9 @@ export default class Profile extends React.Component {
     this.state = {
       loading: false,
       profile: {},
-      username: "",
-      image: "",
-      bio: "",
+      // username: "",
+      // image: "",
+      // bio: "",
 
       user: "",
       articles: [],
@@ -43,7 +43,7 @@ export default class Profile extends React.Component {
     // if (!this.state.user) {
     //   return <Loader />
     // }
-    let { username, image, bio, articles, articlesCount, articlesPerPage, activePage,
+    let { articles, articlesCount, articlesPerPage, activePage,
       feedSelected, following, error } = this.state;
     return (
       <>

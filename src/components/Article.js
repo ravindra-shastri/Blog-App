@@ -28,10 +28,10 @@ export default class Article extends React.Component {
     this.getArticle(params)
   }
 
-  // getDate(date) {
-  //   let newdate = new Date(date).toISOString().split("T")[0];
-  //   return newdate;
-  // }
+  getDate(date) {
+    let newdate = new Date(date).toISOString().split("T")[0];
+    return newdate;
+  }
 
   handleCurrentPage = (index) => {
     this.setState({
@@ -78,7 +78,7 @@ export default class Article extends React.Component {
               </header>
               <div className="article-header-content">
                 <div>
-                  <p> {article.body} </p>
+                  <p className="article-body"> {article.body} </p>
                 </div>
                 <div>
                   <p className="art-taglist">

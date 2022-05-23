@@ -1,5 +1,6 @@
 import React from 'react';
 import Tags from "../components/Tags";
+import Comments from "../components/Comments";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
 // import {Route,Redirect} from 'react-router-dom';
@@ -48,13 +49,13 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-      
-      <div className="header-container">
-            <h2 className="header">
-              Welcome to Blog App <br />
-              <span className="header-span"> A place to share your knowledge.</span>
-            </h2>
-          </div>
+
+        <div className="header-container">
+          <h2 className="header">
+            Welcome to Blog App <br />
+            <span className="header-span"> A place to share your knowledge.</span>
+          </h2>
+        </div>
         <div className="article-tag-container">
           <div className="article-display-card">
             <div className="feed-card">
@@ -120,6 +121,9 @@ export default class Home extends React.Component {
                       <p className="taglist">
                         {article.tagList}
                       </p>
+                      <div>
+                        <Comments />
+                      </div>
                     </div>
                   </button>
                 </Link>
@@ -127,7 +131,9 @@ export default class Home extends React.Component {
               </div>
             )
             }
+
           </div>
+
           <div>
             <Tags getArticles={this.getArticles} selectedTag={this.selectedTag} />
           </div>
@@ -142,29 +148,5 @@ export default class Home extends React.Component {
     )
   }
 }
-
-
-
-// function PrivateRoute({ children, isAuthenticated, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={
-//         ({ location }) => (
-//           isAuthenticated
-//             ? (
-//               children
-//             ) : (
-//               <Redirect
-//                 to={{
-//                   pathname: '/login',
-//                   state: { from: location }
-//                 }}
-//               />
-//             ))}
-//            />
-//          );
-//         }
-
 
 

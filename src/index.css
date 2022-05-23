@@ -273,6 +273,11 @@ code {
 .article-author-name{
 color: white;
 }
+.article-body{
+  color: rgb(91, 91, 91);
+  font-size:.9rem;
+  word-spacing: .3rem;
+}
 .profile-header{
   padding:1rem 0;
   text-align:center;
@@ -369,9 +374,20 @@ font-weight:300;
   border-radius: .2rem;
 }
 
-/* .mdeditor{
-  screenOptions={{
-    headerShown: false;
-  }}
-} */
+.mdeditor{
+    list-style: none;
+  }
+
+  .submit-comment{
+    font-size: .6rem;
+    margin:0  .2rem;
+  }
+  .comment-box{
+    margin: .4rem;
+  }
+  .no-comment{
+    font-size:.6rem;
+    color: gray;
+  }
+
 
