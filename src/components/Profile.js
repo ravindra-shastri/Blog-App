@@ -64,10 +64,6 @@ export default class Profile extends React.Component {
               </button>
             </div>
           </header>
-          {/* {loggedInUser && loggedInUser !== username && ( */}
-
-
-          {/* {loggedInUser && loggedInUser === username && ( */}
           <div className="edit-profile">
             <Link to="/setting">
               <button>
@@ -75,35 +71,15 @@ export default class Profile extends React.Component {
               </button>
             </Link>
           </div>
-          {/* )} */}
-
-
-
-          {/* <div className="feed-card">
-            <h6 onClick={() => this.removeTag}>
-              
-                My Articles
-              </Link>
-            </h6>
-            {/* {this.state.activetag && ( */}
-          {/* <h6>
-                
-                  Favorited 
-                </Link>
-              </h6> */}
-          {/* {/* )}  */}
-          {/* </div>  */}
 
           <article>
             <div>
               <span className={feedSelected === 'author' ? "active" : ""} onClick={() => this.setState({ feedSelected: 'author', activePage: 1 }, this.getFeedArticles)}>
-                {/* <i className="fas fa-newspaper mr-2"></i> */}
                 <div className="feed">
                   My Article
                 </div>
               </span>
               <span className={feedSelected === 'favorited'} onClick={() => this.setState({ feedSelected: 'favorited', activePage: 1 }, this.getFeedArticles)}>
-                {/* <i className="fas fa-newspaper mr-2"></i> */}
                 <div className="feed" to="/">
                   Favorited Articles
                 </div>

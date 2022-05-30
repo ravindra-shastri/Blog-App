@@ -1,11 +1,6 @@
 import React from 'react';
-import Loader from "../components/Loader";
 
 export default class Comment extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   getDate = (date) => {
     let newDate = new Date(date).toISOString().split('T')[0];
@@ -14,9 +9,6 @@ export default class Comment extends React.Component {
 
   render() {
     let comments = this.props.comments;
-    // if (!comments) {
-    //   return <Loader />
-    // }
 
     return (
       <>
