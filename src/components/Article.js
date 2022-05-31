@@ -1,4 +1,6 @@
 import React from 'react';
+import Comments from "../components/Comments";
+
 import { Link } from 'react-router-dom';
 // import ArticlePagination from "./ArticlePagination";
 
@@ -13,7 +15,8 @@ export default class Article extends React.Component {
       article: {},
       articles: [],
       articlesCount: 0,
-      activePage: 1
+      activePage: 1,
+      slug: ''
     }
   }
 
@@ -25,6 +28,7 @@ export default class Article extends React.Component {
 
   componentDidMount() {
     const { params } = this.props.match || {};
+    this.setState({ ...this.state, slug: params.slug });
     this.getArticle(params)
   }
 
@@ -87,6 +91,12 @@ export default class Article extends React.Component {
                 </div>
               </div>
               <hr className="hr-line" />
+              <div className="">
+                {
+                  this.state.slug &&
+                  <Comments slug={this.state.slug} />
+                }
+              </div>
             </div>
           </div>
         </div>

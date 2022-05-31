@@ -2,6 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default class Header extends React.Component {
+
+  handlelogout = () => {
+   return localStorage.clear()
+  }
+  
   render() {
     return (
       <>
@@ -26,6 +31,9 @@ export default class Header extends React.Component {
                   Login
                 </button>
               </NavLink>
+              <button className="header-nav-btn" onClick={this.handlelogout}>
+                Log out
+              </button>
             </nav>
           </header>
         </div>

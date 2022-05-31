@@ -115,7 +115,6 @@ export default class SignupPage extends React.Component {
                 disabled={username || email || password}
               />
             </div>
-
           </form>
         </div>
       </>

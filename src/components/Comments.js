@@ -10,6 +10,7 @@ export default class Comments extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     this.getComments();
   }
 
@@ -18,15 +19,28 @@ export default class Comments extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = (event) => {
+
+
+  addComment = (event) => {
     event.preventDefault();
     let slug = this.props.slug;
     let { inputText } = this.state;
+
     if (inputText) {
+      let c;
+      try {
+        c = JSON.parse(localStorage.getItem('user'))
+      } catch (e) {
+        c = {};
+      }
+
+      const { token = '' } = c || {};
+
       fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments`, {
         method: 'POST',
         body: JSON.stringify({ comment: { body: inputText } }),
         headers: {
+          Authorization: `Token ${token}`,
           'Content-Type': 'application/json',
         }
       })
@@ -47,13 +61,22 @@ export default class Comments extends React.Component {
     }
   }
 
-  handleDelete = ({ target }) => {
-    let { id } = target.dataset;
-    console.log(typeof id);
+  handleDelete = (id) => {
+
     let slug = this.props.slug;
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments`, {
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments/${id}`, {
       method: 'DELETE',
       headers: {
+        Authorization: `Token ${token}`,
         'Content-Type': 'application/json'
       }
     })
@@ -93,21 +116,32 @@ export default class Comments extends React.Component {
     return (
       <>
         <div>
-          <form onSubmit={this.handleSubmit} className="comment-box">
-            <textarea
-              placeholder="Enter comment"
-              onChange={this.handleChange}
-              rows="1"
-              value={inputText}
-              name="inputText"
-            >
-            </textarea>
-            <input type="submit" value="Add Comment" className="submit-comment" />
+          <form onSubmit={this.addComment} className="comment-box">
+            <div className="comment-content">
+              <textarea
+                placeholder="Enter comment"
+                onChange={this.handleChange}
+                rows="1"
+                value={inputText}
+                name="inputText"
+              >
+              </textarea>
+              <div>
+                <input
+                  type="submit"
+                  value="Add Comment"
+                  className="submit-comment"
+                  onSubmit={this.addComment}
+                />
+              </div>
+            </div>
             <div>
-              <Comment comments={comments} handleDelete={this.handleDelete} />
+              <Comment
+                comments={comments}
+                handleDelete={this.handleDelete}
+              />
             </div>
           </form>
-
         </div>
       </>
     )

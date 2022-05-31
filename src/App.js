@@ -38,7 +38,7 @@ export default class App extends React.Component {
     })
       .then((res) => res.json())
       .then(data => {
-        if (data.errors && window.location.pathname !== '/login') return window.location.href = '/login';
+        if (data.errors && window.location.pathname !== '/login' && window.location.pathname !== '/signup') return window.location.href = '/login';
         else
           localStorage.setItem('user', JSON.stringify(data.user));
       })
@@ -74,42 +74,3 @@ export default class App extends React.Component {
     )
   }
 }
-
-//  <nav>
-//   {isLoggedIn ? (
-//     <AuthriseHeader/>
-//   ) : (
-//     <NonAuthriseHeader />
-//   )}
-// </nav>
-// function AuthriseHeader(props) {
-//   let { user } = userData.data;
-//   return (
-//     <nav>
-//       <NavLink
-//         to={{
-//           pathname: `/profiles/${user.username}`,
-//         }}>
-//         <li>
-//           <img
-//             src={user.image}
-//             alt={user.username}
-//           />
-//           <span>{user.username}</span>
-//         </li>
-//       </NavLink>
-//     </nav>
-//   );
-// }
-// function NonAuthriseHeader(props) {
-//   return (
-//     <nav>
-//       <NavLink
-//         to="/articles"
-//         activeClassName="btn-active"
-//       >
-//         Home
-//       </NavLink>
-//     </nav>
-//   );
-// } 

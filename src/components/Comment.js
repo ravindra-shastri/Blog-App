@@ -12,33 +12,39 @@ export default class Comment extends React.Component {
 
     return (
       <>
-        {comments.length > 0 ? (
-          comments.map((comment) =>{
-            return (
-            <div key={comment.createdAt}>
-                <div>
-                  <img src={comment.author.image} alt={comment.author.username} />
+        <div>
+          {comments.length > 0 ? (
+            comments.map((comment) => {
+              return (
+                <div key={comment.createdAt}>
+                  <div>
+                    <img src={comment.author.image} alt={comment.author.username} />
+                  </div>
+                  <div>
+                    <h3>{comment.author.username}</h3>
+                    <h3>{comment.createdAt}</h3>
+                  </div>
+                  <div>
+                    <button
+                      onClick={(e) => this.props.handleDelete(comment.id)}
+                    >
+                      <i className="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                  <p>{comment.body}</p>
                 </div>
-                <div>
-                  <h3>{comment.author.username}</h3>
-                  <h3>{comment.createdAt}</h3>
-                </div> 
-                <span>
-                  <i data-id="{comment.id}">
-                    onClick={(e) => this.props.handleDelete(e)}
-                  </i>
-                </span>
-                <p>{comment.body}</p>
-              </div>
-            )
-          }) 
-        ): 
-        < h2 className="no-comment" > No comments yet</h2>}
+              )
+            })
+          ) :
+            <div className= "no-comment">
+              < h2 className="no-comment-msg" > No comments yet</h2>
+            </div>
+          }
+        </div>
+      </>
+    );
 
-          </>
-    ) ;
-    
-    
+
   }
 }
 

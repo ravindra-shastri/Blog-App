@@ -1,6 +1,6 @@
 import React from 'react';
 import Tags from "../components/Tags";
-import Comments from "../components/Comments";
+// import Comments from "../components/Comments";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
 // import {Route,Redirect} from 'react-router-dom';
@@ -121,9 +121,9 @@ export default class Home extends React.Component {
                       <p className="taglist">
                         {article.tagList}
                       </p>
-                      <div>
+                      {/* <div>
                         <Comments />
-                      </div>
+                      </div> */}
                     </div>
                   </button>
                 </Link>
