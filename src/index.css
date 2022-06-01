@@ -333,7 +333,35 @@ code {
   font-size: .9rem;
   word-spacing: .3rem;
 }
-
+.article-update{
+  display: flex;
+}
+.article-update-btn-content{
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+.article-update-btn1{
+background-color:black;
+color: rgb(173,173,173);
+border:1px solid rgb(173,173,173);
+border-radius: 2px;
+padding: .2rem;
+}
+.article-update-btn1:hover{
+  background-color:rgb(173,173,173);
+  color:white;
+}
+.article-update-btn2{
+  background-color:black;
+  color: rgb(157,84,84);
+  border:1px solid rgb(157,84,84);
+  border-radius: 2px;
+  padding: .2rem;
+}
+.article-update-btn2:hover{
+  background-color:rgb(157,84,84);
+  color:white;
+}
 .profile-header {
   padding: 1rem 0;
   text-align: center;
@@ -468,16 +496,41 @@ code {
 
 .no-comment {
   text-align: center;
-  margin-top: -4.8rem;
+  margin-top: -6.8rem;
   margin-bottom: 1.5rem;
 }
 .comment-content{
-  display: flex;
-  justify-content:center;
+  text-align: center;
   margin-top: 1rem;
 }
 .no-comment-msg {
   font-size: .6rem;
   font-weight: 300;
   color: orchid;
+}
+.update-article{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 1rem;
+  border: none;
+}
+.edit-article{
+  margin: .5rem;
+  border:1px solid rgb(217,217,217);
+  padding: .5rem;
+  border-radius: .2rem;
+}
+.update-article-btn-content{
+  text-align: right;
+  margin-right: .5rem;
+}
+.update-article-btn{
+  width:10rem;
+  padding: .6rem;
+  border: none;
+  border-radius: .2rem;
+  color: #fff;
+  background-color:rgb(107,185,92);
 }

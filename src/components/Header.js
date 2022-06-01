@@ -23,6 +23,16 @@ export default class Header extends React.Component {
                   Home
                 </button>
               </NavLink>
+              <NavLink to="/addArticle">
+                <button className="header-nav-btn">
+                <i className="fa-solid fa-pen-to-square"></i> New Post
+                </button>
+              </NavLink>
+              <NavLink to="/settings">
+                <button className="header-nav-btn">
+                <i className="fa-solid fa-gear"></i> Settings
+                </button>
+              </NavLink>
               <NavLink to="/signup" exact>
                 <button className="header-nav-btn">
                   Sign up

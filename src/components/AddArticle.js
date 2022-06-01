@@ -25,9 +25,22 @@ export default class AddArticle extends React.Component {
     tags = tags.split(',').map((tag) => tag.trim());
     event.preventDefault();
     if (title && description && tags && body) {
+      // let slug = this.props.slug;
+      let c;
+      try {
+        c = JSON.parse(localStorage.getItem('user'))
+      } catch (e) {
+        c = {};
+      }
+
+      const { token = '' } = c || {};
+
       fetch("https://mighty-oasis-08080.herokuapp.com/api/articles", {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           article: { title, description, tagList: tags, body },
         }),

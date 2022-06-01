@@ -57,7 +57,7 @@ export default class Profile extends React.Component {
             </div>
           </header>
           <div className="edit-profile">
-            <Link to="/setting">
+            <Link to="/settings">
               <button>
                 <i className="fas fa-user-edit mr-2"></i>  Edit Profile
               </button>

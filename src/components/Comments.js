@@ -62,7 +62,6 @@ export default class Comments extends React.Component {
   }
 
   handleDelete = (id) => {
-
     let slug = this.props.slug;
     let c;
     try {
@@ -132,7 +131,7 @@ export default class Comments extends React.Component {
               <div>
                 <input
                   type="submit"
-                  value="Add Comment"
+                  value="Post Comment"
                   className="submit-comment"
                   onSubmit={this.addComment}
                 />

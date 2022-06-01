@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom';
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Article from "./components/Article";
 import AddArticle from "./components/AddArticle";
-import Setting from "./components/Setting";
+import EditArticle from "./components/EditArticle";
+import Settings from "./components/Settings";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import Login from "./components/Login";
@@ -59,14 +60,15 @@ export default class App extends React.Component {
               <Header />
               <Switch>
                 <Route path="/" exact component={Home}></Route>
-                <Route path="/articles" exact component={Home}></Route>
-                <Route path="/articles/:slug" exact component={Article}></Route>
+                <Route path="/articles" component={Home}></Route>
+                <Route path="/articles/:slug" component={Article}></Route>
                 <Route path="/addArticle" exact component={AddArticle}></Route>
-                <Route path="/setting" exact component={Setting}></Route>
+                <Route path="/articles/:slug/edit" exact component={EditArticle}></Route>
+                <Route path="/settings" exact component={Settings}></Route>
                 <Route path="/profiles/:id" exact component={Profile}></Route>
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="/signup" exact component={SignupPage}></Route>
-                <Route path="*" component={NotFound}></Route>
+                <Route path="*" exact component={NotFound}></Route>
               </Switch>
             </BrowserRouter>
         }

@@ -1,5 +1,4 @@
-import React from 'react';
-import Comments from "./Comments";
+import React from 'react';  
 import { Link } from 'react-router-dom';
 // let articleURL = "https://mighty-oasis-08080.herokuapp.com/api/";
 

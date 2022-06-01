@@ -1,7 +1,7 @@
 import React from 'react';
-import Loader from "../components/Loader";
+import Loader from "./Loader";
 
-export default class Setting extends React.Component {
+export default class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
