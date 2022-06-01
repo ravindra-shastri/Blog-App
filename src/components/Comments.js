@@ -116,7 +116,10 @@ export default class Comments extends React.Component {
     return (
       <>
         <div>
-          <form onSubmit={this.addComment} className="comment-box">
+          <form
+            onSubmit={this.addComment}
+            className="comment-box"
+          >
             <div className="comment-content">
               <textarea
                 placeholder="Enter comment"

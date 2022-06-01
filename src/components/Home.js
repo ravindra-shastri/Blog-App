@@ -1,9 +1,7 @@
 import React from 'react';
 import Tags from "../components/Tags";
-// import Comments from "../components/Comments";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
-// import {Route,Redirect} from 'react-router-dom';
 
 const LIMIT = 10;
 
@@ -23,7 +21,8 @@ export default class Home extends React.Component {
     const offset = tag ? 0 : ((activePage - 1) * LIMIT);
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?limit=${LIMIT}&offset=${offset}${tag ? `&tag=${tag}` : ''}`)
       .then((res) => res.json())
-      .then(({ articles, articlesCount }) => this.setState({ articles, articlesCount }))
+      .then(({ articles, articlesCount }) =>
+        this.setState({ articles, articlesCount }))
   }
 
   componentDidMount() {
@@ -49,11 +48,12 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-
         <div className="header-container">
           <h2 className="header">
             Welcome to Blog App <br />
-            <span className="header-span"> A place to share your knowledge.</span>
+            <span className="header-span">
+              A place to share your knowledge.
+            </span>
           </h2>
         </div>
         <div className="article-tag-container">
@@ -77,7 +77,9 @@ export default class Home extends React.Component {
               <div className="author-container">
                 <div className="author-img-container">
                   <div>
-                    <Link className="link" to={`/profiles/${article.author.username}`}>
+                    <Link className="link"
+                      to={`/profiles/${article.author.username}`}
+                    >
                       <button className="author-img-content-home">
                         <div>
                           <img
@@ -102,7 +104,9 @@ export default class Home extends React.Component {
                     </i>
                   </p>
                 </div>
-                <Link className="link" to={`/articles/${article.slug}`}>
+                <Link className="link"
+                  to={`/articles/${article.slug}`}
+                >
                   <button className="author-description-btn-home">
                     <div className="author-desc">
                       <h2 className="author-title">
@@ -113,17 +117,12 @@ export default class Home extends React.Component {
                       </p>
                     </div>
                     <div className="read-more-content">
-                      {/* <Link className="link" to="/articles"> */}
                       <p className="read-more-btn">
                         Read More ...
                       </p>
-                      {/* </Link> */}
                       <p className="taglist">
                         {article.tagList}
                       </p>
-                      {/* <div>
-                        <Comments />
-                      </div> */}
                     </div>
                   </button>
                 </Link>
@@ -131,9 +130,7 @@ export default class Home extends React.Component {
               </div>
             )
             }
-
           </div>
-
           <div>
             <Tags getArticles={this.getArticles} selectedTag={this.selectedTag} />
           </div>
@@ -148,5 +145,9 @@ export default class Home extends React.Component {
     )
   }
 }
+
+
+
+
 
 

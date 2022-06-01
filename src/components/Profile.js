@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ArticlePagination from './ArticlePagination';
-import Article from './Article';
-// import Loader from "./Loader"
+import UserArticle from './UserArticle';
 
 export default class Profile extends React.Component {
   constructor(props) {
@@ -10,10 +9,6 @@ export default class Profile extends React.Component {
     this.state = {
       loading: false,
       profile: {},
-      // username: "",
-      // image: "",
-      // bio: "",
-
       user: "",
       articles: [],
       articlesCount: null,
@@ -40,9 +35,6 @@ export default class Profile extends React.Component {
 
   render() {
     let profile = this.state.profile;
-    // if (!this.state.user) {
-    //   return <Loader />
-    // }
     let { articles, articlesCount, articlesPerPage, activePage,
       feedSelected, following, error } = this.state;
     return (
@@ -71,10 +63,11 @@ export default class Profile extends React.Component {
               </button>
             </Link>
           </div>
-
           <article>
             <div>
-              <span className={feedSelected === 'author' ? "active" : ""} onClick={() => this.setState({ feedSelected: 'author', activePage: 1 }, this.getFeedArticles)}>
+              <span className={feedSelected === 'author' ? "active" : ""}
+                onClick={() => this.setState({ feedSelected: 'author', activePage: 1 },
+                  this.getFeedArticles)}>
                 <div className="feed">
                   My Article
                 </div>
@@ -86,10 +79,11 @@ export default class Profile extends React.Component {
               </span>
             </div>
             <div>
-              <Article
+              <UserArticle
                 articles={articles}
                 error={error}
                 handleFavorite={this.handleFavorite}
+                {...this.props}
               />
             </div>
           </article>

@@ -1,12 +1,7 @@
 import React from 'react';
 import Comments from "../components/Comments";
-
 import { Link } from 'react-router-dom';
-// import ArticlePagination from "./ArticlePagination";
-
 // let articleURL = "https://mighty-oasis-08080.herokuapp.com/api/";
-
-// const LIMIT = 10;
 
 export default class Article extends React.Component {
   constructor(props) {
@@ -28,6 +23,7 @@ export default class Article extends React.Component {
 
   componentDidMount() {
     const { params } = this.props.match || {};
+    console.log(this.props.match)
     this.setState({ ...this.state, slug: params.slug });
     this.getArticle(params)
   }

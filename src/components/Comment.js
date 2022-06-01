@@ -18,7 +18,9 @@ export default class Comment extends React.Component {
               return (
                 <div key={comment.createdAt}>
                   <div>
-                    <img src={comment.author.image} alt={comment.author.username} />
+                    <img src={comment.author.image}
+                      alt={comment.author.username}
+                    />
                   </div>
                   <div>
                     <h3>{comment.author.username}</h3>
@@ -36,7 +38,7 @@ export default class Comment extends React.Component {
               )
             })
           ) :
-            <div className= "no-comment">
+            <div className="no-comment">
               < h2 className="no-comment-msg" > No comments yet</h2>
             </div>
           }

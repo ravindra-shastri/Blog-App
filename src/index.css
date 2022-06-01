@@ -18,7 +18,6 @@ code {
 }
 
 .header {
-  /* width: 100%; */
   color: rgb(255, 255, 255);
   background-color: rgb(107, 185, 92);
   font-size: 2rem;
@@ -63,12 +62,10 @@ code {
   width: 80%;
   display: flex;
   margin: 0 auto;
-  /* width:80%; */
 }
 
 .article-display-card {
   width: 80%;
-  /* margin-left: 12rem; */
 }
 
 .feed {
@@ -79,11 +76,11 @@ code {
   margin-left: 2rem;
   border-bottom: 2px solid rgb(107, 185, 92);
   text-decoration: none;
+  cursor: default;
 }
 
 .feed-card {
   display: flex;
-  /* margin-left:16rem; */
   margin-bottom: -1.9rem;
 }
 
@@ -239,10 +236,9 @@ code {
 }
 
 .active {
-  background-color: rgb(62, 180, 62);
-  color: white;
-  border: .01px solid rgb(197, 197, 197);
-  border-radius: 0.04px;
+  color: rgb(125, 125, 125);
+  border: .01px solid rgb(255, 164, 164);
+  border-radius: 0.06px;
   padding: .2rem .4rem;
   margin: 0 .1rem;
 }
