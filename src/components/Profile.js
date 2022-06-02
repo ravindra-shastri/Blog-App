@@ -44,17 +44,15 @@ export default class Profile extends React.Component {
 
 
   getArticlesFeed = ({ username = "" } = {}) => {
-    // this.setState({username:this.state.user});
+    this.setState({username:this.state.user});
     // let { username } = this.state.user;
     let offset = (this.state.activePage - 1) * 10;
-
     let c;
     try {
       c = JSON.parse(localStorage.getItem('user'))
     } catch (e) {
       c = {};
     }
-
     const { token = '' } = c || {};
 
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?${this.state.feedSelected}=${username}&
@@ -100,7 +98,6 @@ export default class Profile extends React.Component {
     } catch (e) {
       c = {};
     }
-
     const { token = '' } = c || {};
 
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}/follow`, {
