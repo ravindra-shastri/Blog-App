@@ -21,8 +21,25 @@ export default class Profile extends React.Component {
   }
 
   getProfile = ({ username = "" } = {}) => {
-    this.setState({ loading: true })
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}`)
+    this.setState({ loading: true });
+
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    )
       .then((res) => res.json())
       .then(({ profile }) => this.setState({ profile }))
       .finally(() => this.setState({ loading: false }))
@@ -44,7 +61,8 @@ export default class Profile extends React.Component {
 
 
   getArticlesFeed = ({ username = "" } = {}) => {
-    this.setState({username:this.state.user});
+    this.setState({ username: this.state.user });
+    // console.log(username)
     // let { username } = this.state.user;
     let offset = (this.state.activePage - 1) * 10;
     let c;
@@ -86,10 +104,7 @@ export default class Profile extends React.Component {
   };
 
   handleFollow = () => {
-    this.getProfile();
-    // this.setState({username:this.state.user});
-    let { username } = this.state.user;
-    let { following } = this.state;
+    let { username, following } = this.state.profile;
     let method = following ? 'DELETE' : 'POST';
 
     let c;
@@ -116,7 +131,6 @@ export default class Profile extends React.Component {
         return res.json();
       })
       .then(({ profile }) => {
-        console.log(profile);
         this.setState({ following: profile.following });
       })
       .catch((err) => console.log(err));
@@ -124,9 +138,9 @@ export default class Profile extends React.Component {
 
   handleFavorite = ({ target }) => {
     let { id, slug } = target.dataset;
-    let method = id === 'false' ? 'POST' : 'DELETE';
-    // console.log(method);
-    // console.log(id, slug);
+    console.log(slug);
+    let method = id ? 'DELETE' : 'POST';
+    
     let c;
     try {
       c = JSON.parse(localStorage.getItem('user'))
@@ -141,15 +155,15 @@ export default class Profile extends React.Component {
         Authorization: `Token ${token}`,
       },
     })
-    .then((res) => {
-      if (!res.ok) {
-        return res.json()
-          .then(({ errors }) => {
-            return (errors);
-          });
-      }
-      return res.json();
-    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return res.json();
+      })
       .then((data) => {
         this.getArticlesFeed();
       })
@@ -159,7 +173,7 @@ export default class Profile extends React.Component {
   render() {
     let profile = this.state.profile;
     let { articles, articlesCount, articlesPerPage, activePage,
-      feedSelected, following, error } = this.state;
+      feedSelected, error } = this.state;
     return (
       <>
         <div>
@@ -175,7 +189,7 @@ export default class Profile extends React.Component {
             </div>
             <div className="edit-profile">
               <button onClick={this.handleFollow}>
-                <i className={!following ? "fas fa-plus mr-2" : "fas fa-minus mr-2"}></i>  {!following ? 'follow' : 'unfollow '}  {profile.username}
+                <i className={!profile.following ? "fas fa-plus mr-2" : "fas fa-minus mr-2"}></i>  {!profile.following ? 'follow' : 'unfollow '}  {profile.username}
               </button>
             </div>
           </header>
