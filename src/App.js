@@ -60,8 +60,8 @@ export default class App extends React.Component {
               <Header />
               <Switch>
                 <Route path="/" exact component={Home}></Route>
-                <Route path="/articles" component={Home}></Route>
-                <Route path="/articles/:slug" component={Article}></Route>
+                <Route path="/articles" exact component={Home}></Route>
+                <Route path="/articles/:slug" exact component={Article}></Route>
                 <Route path="/addArticle" exact component={AddArticle}></Route>
                 <Route path="/articles/:slug/edit" exact component={EditArticle}></Route>
                 <Route path="/settings" exact component={Settings}></Route>

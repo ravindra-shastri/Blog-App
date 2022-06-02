@@ -63,7 +63,7 @@ export default class Article extends React.Component {
                   </button>
                 </Link>
               </div>
-              <p className="like">
+              <p className="like" onClick={this.props.handleFavorite}>
                 <i className="fa-solid fa-heart like-icon">
                 </i>
               </p>

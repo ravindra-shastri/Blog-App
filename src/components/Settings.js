@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from "./Loader";
+// import Loader from "./Loader";
 
 export default class Settings extends React.Component {
   constructor(props) {
@@ -58,9 +58,9 @@ export default class Settings extends React.Component {
   }
 
   render() {
-    if (!this.state.username) {
-      return <Loader />
-    }
+    // if (!this.state.username) {
+    //   return <Loader />
+    // }
 
     let { username, email, password } = this.state.errors;
     return (

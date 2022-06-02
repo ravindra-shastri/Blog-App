@@ -33,6 +33,132 @@ export default class Profile extends React.Component {
     this.getProfile({ username: id });
   }
 
+  handleClick = ({ target }) => {
+    let { id } = target.dataset;
+    this.setState({ activePage: id }, this.getArticlesFeed)
+  };
+
+  updateCurrentPage = (index) => {
+    this.setState({ activePage: index }, this.getArticlesFeed);
+  };
+
+
+  getArticlesFeed = ({ username = "" } = {}) => {
+    // this.setState({username:this.state.user});
+    // let { username } = this.state.user;
+    let offset = (this.state.activePage - 1) * 10;
+
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?${this.state.feedSelected}=${username}&
+    limit=${this.state.articlesPerPage}&offset=${offset}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-type': 'application/json',
+        },
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.setState({
+          articles: data.articles,
+          articlesCount: data.articlesCount,
+        });
+      })
+      .catch((err) => {
+        this.setState({ error: 'Not able to fetch Articles' });
+      });
+  };
+
+  handleFollow = () => {
+    this.getProfile();
+    // this.setState({username:this.state.user});
+    let { username } = this.state.user;
+    let { following } = this.state;
+    let method = following ? 'DELETE' : 'POST';
+
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}/follow`, {
+      method: method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return res.json();
+      })
+      .then(({ profile }) => {
+        console.log(profile);
+        this.setState({ following: profile.following });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  handleFavorite = ({ target }) => {
+    let { id, slug } = target.dataset;
+    let method = id === 'false' ? 'POST' : 'DELETE';
+    // console.log(method);
+    // console.log(id, slug);
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+      method: method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((res) => {
+      if (!res.ok) {
+        return res.json()
+          .then(({ errors }) => {
+            return (errors);
+          });
+      }
+      return res.json();
+    })
+      .then((data) => {
+        this.getArticlesFeed();
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     let profile = this.state.profile;
     let { articles, articlesCount, articlesPerPage, activePage,
@@ -67,12 +193,12 @@ export default class Profile extends React.Component {
             <div>
               <span className={feedSelected === 'author' ? "active" : ""}
                 onClick={() => this.setState({ feedSelected: 'author', activePage: 1 },
-                  this.getFeedArticles)}>
+                  this.getArticlesFeed)}>
                 <div className="feed">
                   My Article
                 </div>
               </span>
-              <span className={feedSelected === 'favorited'} onClick={() => this.setState({ feedSelected: 'favorited', activePage: 1 }, this.getFeedArticles)}>
+              <span className={feedSelected === 'favorited'} onClick={() => this.setState({ feedSelected: 'favorited', activePage: 1 }, this.getArticlesFeed)}>
                 <div className="feed" to="/">
                   Favorited Articles
                 </div>
