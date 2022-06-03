@@ -101,14 +101,14 @@ export default class Login extends React.Component {
             <span>
               {password}
             </span>
-            <input
-              className="submit-btn"
-              type="submit"
-              value="Login"
-              disabled={password || email} />
-            {/* <button>
-              Signin
-            </button> */}
+            <div className="btn">
+              <input
+                className="signup-btn submit"
+                type="submit"
+                value="Login"
+                disabled={password || email}
+              />
+            </div>
           </form>
         </div>
       </>

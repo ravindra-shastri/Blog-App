@@ -107,23 +107,15 @@ export default class SignupPage extends React.Component {
             <span>
               {password}
             </span>
-            <input
-              type="submit"
-              className="submit-btn"
-              value="Sign Up"
-              disabled={username || email || password}
-            />
+            <div className="btn">
+              <input
+                type="submit"
+                className="signup-btn"
+                value="Sign Up"
+                disabled={username || email || password}
+              />
+            </div>
           </form>
-          {/* <div className="signup-btn">
-            <button>
-              Signup
-            </button>
-            <Link to="/login">
-              <button>
-                Login
-              </button>
-            </Link>
-          </div> */}
         </div>
       </>
     )

@@ -3,7 +3,7 @@ import "../loader.css";
 
 export default function Loader() {
   return (
-    <div className="">
+    <div>
       <div className="lds-grid">
         <div></div>
         <div></div>

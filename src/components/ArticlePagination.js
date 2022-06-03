@@ -1,9 +1,6 @@
 import React from 'react';
 
 export default class ArticlePagination extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   render() {
     let {
@@ -21,11 +18,14 @@ export default class ArticlePagination extends React.Component {
       <>
         <div className="page-container">
           <div>
-            <button className="prev-btn" onClick={() => handleCurrentPage(activePage - 1)} disabled={activePage <= 1}>
+            <button
+              className="prev-btn"
+              onClick={() => handleCurrentPage(activePage - 1)}
+              disabled={activePage <= 1}>
               {"< Prev"}
             </button>
           </div>
-          <div>
+          <div className="pagination-num">
             {pagesArray.map((page, index) =>
               <span
                 key={page}
@@ -38,7 +38,10 @@ export default class ArticlePagination extends React.Component {
           </div>
           <div>
             {
-              <button className="next-btn" onClick={() => handleCurrentPage(activePage + 1)} disabled={activePage >= totalPage}>
+              <button
+                className="next-btn"
+                onClick={() => handleCurrentPage(activePage + 1)}
+                disabled={activePage >= totalPage}>
                 {"Next >"}
               </button>
             }

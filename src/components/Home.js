@@ -2,7 +2,6 @@ import React from 'react';
 import Tags from "../components/Tags";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
-// import {Route,Redirect} from 'react-router-dom';
 
 const LIMIT = 10;
 
@@ -13,7 +12,7 @@ export default class Home extends React.Component {
       articles: [],
       articlesCount: 0,
       activePage: 1,
-      activetag: "Node"
+      activetag: ""
     }
   }
 
@@ -22,7 +21,8 @@ export default class Home extends React.Component {
     const offset = tag ? 0 : ((activePage - 1) * LIMIT);
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?limit=${LIMIT}&offset=${offset}${tag ? `&tag=${tag}` : ''}`)
       .then((res) => res.json())
-      .then(({ articles, articlesCount }) => this.setState({ articles, articlesCount }))
+      .then(({ articles, articlesCount }) =>
+        this.setState({ articles, articlesCount }))
   }
 
   componentDidMount() {
@@ -48,6 +48,14 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
+        <div className="header-container">
+          <h2 className="header">
+            Welcome to Blog App <br />
+            <span className="header-span">
+              A place to share your knowledge.
+            </span>
+          </h2>
+        </div>
         <div className="article-tag-container">
           <div className="article-display-card">
             <div className="feed-card">
@@ -69,8 +77,10 @@ export default class Home extends React.Component {
               <div className="author-container">
                 <div className="author-img-container">
                   <div>
-                    <Link className="link" to={`/profile/${article.author.username}`}>
-                      <button className="author-img-content">
+                    <Link className="link"
+                      to={`/profiles/${article.author.username}`}
+                    >
+                      <button className="author-img-content-home">
                         <div>
                           <img
                             className="author-img"
@@ -94,8 +104,10 @@ export default class Home extends React.Component {
                     </i>
                   </p>
                 </div>
-                <Link className="link" to={`/articles/${article.slug}`}>
-                  <button className="author-description-btn">
+                <Link className="link"
+                  to={`/articles/${article.slug}`}
+                >
+                  <button className="author-description-btn-home">
                     <div className="author-desc">
                       <h2 className="author-title">
                         {article.title}
@@ -105,11 +117,9 @@ export default class Home extends React.Component {
                       </p>
                     </div>
                     <div className="read-more-content">
-                      {/* <Link className="link" to="/articles"> */}
                       <p className="read-more-btn">
                         Read More ...
                       </p>
-                      {/* </Link> */}
                       <p className="taglist">
                         {article.tagList}
                       </p>
@@ -138,26 +148,6 @@ export default class Home extends React.Component {
 
 
 
-// function PrivateRoute({ children, isAuthenticated, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={
-//         ({ location }) => (
-//           isAuthenticated
-//             ? (
-//               children
-//             ) : (
-//               <Redirect
-//                 to={{
-//                   pathname: '/login',
-//                   state: { from: location }
-//                 }}
-//               />
-//             ))}
-//            />
-//          );
-//         }
 
 
 

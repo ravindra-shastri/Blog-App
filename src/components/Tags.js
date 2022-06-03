@@ -1,6 +1,5 @@
 import React from 'react';
 import Loader from "../components/Loader";
-// import { Link } from 'react-router-dom';
 
 export default class Tags extends React.Component {
   constructor(props) {
