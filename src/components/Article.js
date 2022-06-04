@@ -1,8 +1,6 @@
 import React from 'react';
 import Comments from "../components/Comments";
 import { Link } from 'react-router-dom';
-// let articleURL = "https://mighty-oasis-08080.herokuapp.com/api/";
-
 export default class Article extends React.Component {
   constructor(props) {
     super(props);
@@ -28,10 +26,8 @@ export default class Article extends React.Component {
     } catch (e) {
       c = {};
     }
-
     const { token = '' } = c || {};
     const { slug } = this.state;
-
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}`, {
       method: 'DELETE',
       headers: {
@@ -97,7 +93,9 @@ export default class Article extends React.Component {
                         </div>
                         <div className="article-update">
                           <div>
-                            <Link className="link" to={`/profiles/${article.author.username}`}>
+                            <Link className="link"
+                              to={`/profiles/${article.author.username}`}
+                            >
                               <h2 className="author-name">
                                 {article.author.username}
                               </h2>
@@ -109,11 +107,16 @@ export default class Article extends React.Component {
                           <div className="article-update-btn-content">
                             <Link to={`/articles/${article.slug}/edit`}>
                               <button className="article-update-btn1">
-                                <i className="fa-solid fa-pen"></i> Edit Article
+                                <i className="fa-solid fa-pen"></i>
+                                Edit Article
                               </button>
                             </Link>
-                            <button className="article-update-btn2" onClick={this.deleteArticle}>
-                              <i className="fa-solid fa-trash-can"></i> Delete Article
+                            <button
+                              className="article-update-btn2"
+                              onClick={this.deleteArticle}
+                            >
+                              <i className="fa-solid fa-trash-can"></i>
+                              Delete Article
                             </button>
                           </div>
                         </div>
@@ -124,7 +127,10 @@ export default class Article extends React.Component {
               </header>
               <div className="article-header-content">
                 <div>
-                  <p className="article-body"> {article.body} </p>
+                  <p
+                    className="article-body">
+                    {article.body}
+                  </p>
                 </div>
                 <div>
                   <p className="art-taglist">

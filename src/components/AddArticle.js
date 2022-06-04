@@ -25,16 +25,13 @@ export default class AddArticle extends React.Component {
     tags = tags.split(',').map((tag) => tag.trim());
     event.preventDefault();
     if (title && description && tags && body) {
-      // let slug = this.props.slug;
       let c;
       try {
         c = JSON.parse(localStorage.getItem('user'))
       } catch (e) {
         c = {};
       }
-
       const { token = '' } = c || {};
-
       fetch("https://mighty-oasis-08080.herokuapp.com/api/articles", {
         method: 'POST',
         headers: {
@@ -42,7 +39,13 @@ export default class AddArticle extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          article: { title, description, tagList: tags, body },
+          article: {
+            title,
+            description,
+            body,
+            tagList: tags
+
+          },
         }),
       })
         .then((res) => {
@@ -93,8 +96,13 @@ export default class AddArticle extends React.Component {
     return (
       <>
         <div>
-          <h2 className="new-article-header"> Add New Article </h2>
-          <form onSubmit={this.handleSubmit} className="new-article-container">
+          <h2 className="new-article-header">
+            Add New Article
+          </h2>
+          <form
+            onSubmit={this.handleSubmit}
+            className="new-article-container"
+          >
             <input
               type="text"
               placeholder="Enter your Title"

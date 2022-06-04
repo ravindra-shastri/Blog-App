@@ -20,8 +20,10 @@ export default class ArticlePagination extends React.Component {
           <div>
             <button
               className="prev-btn"
-              onClick={() => handleCurrentPage(activePage - 1)}
-              disabled={activePage <= 1}>
+              onClick={() =>
+                handleCurrentPage(activePage - 1)}
+              disabled={activePage <= 1}
+            >
               {"< Prev"}
             </button>
           </div>
@@ -41,7 +43,8 @@ export default class ArticlePagination extends React.Component {
               <button
                 className="next-btn"
                 onClick={() => handleCurrentPage(activePage + 1)}
-                disabled={activePage >= totalPage}>
+                disabled={activePage >= totalPage}
+              >
                 {"Next >"}
               </button>
             }

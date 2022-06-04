@@ -1,12 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 export default class Header extends React.Component {
-
   handlelogout = () => {
     return localStorage.clear()
   }
-
   render() {
     return (
       <>
@@ -25,12 +22,14 @@ export default class Header extends React.Component {
               </NavLink>
               <NavLink to="/addArticle">
                 <button className="header-nav-btn">
-                <i className="fa-solid fa-pen-to-square"></i> New Post
+                  <i className="fa-solid fa-pen-to-square"></i>
+                  New Post
                 </button>
               </NavLink>
               <NavLink to="/settings">
                 <button className="header-nav-btn">
-                <i className="fa-solid fa-gear"></i> Settings
+                  <i className="fa-solid fa-gear"></i>
+                  Settings
                 </button>
               </NavLink>
               <NavLink to="/signup" exact>
@@ -44,7 +43,8 @@ export default class Header extends React.Component {
                 </button>
               </NavLink>
               <button className="header-nav-btn"
-                onClick={this.handlelogout}>
+                onClick={this.handlelogout}
+              >
                 Log out
               </button>
             </nav>

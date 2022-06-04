@@ -1,7 +1,5 @@
-import React from 'react';  
+import React from 'react';
 import { Link } from 'react-router-dom';
-// let articleURL = "https://mighty-oasis-08080.herokuapp.com/api/";
-
 export default class Article extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +32,35 @@ export default class Article extends React.Component {
     })
   }
 
+  handleFavorite = (slug) => {
+    console.log(slug)
+    let method = slug ? 'POST' : 'DELETE';
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+      method: method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return res.json();
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <>
@@ -63,9 +90,11 @@ export default class Article extends React.Component {
                   </button>
                 </Link>
               </div>
-              <p className="like" onClick={this.props.handleFavorite}>
-                <i className="fa-solid fa-heart like-icon">
-                </i>
+              <p
+                className={"active" ? "active-fav" : "like"}
+                onClick={() => this.handleFavorite(article.slug)}
+              >
+                <i className="fa-solid fa-heart like-icon"></i>
               </p>
             </div>
             <Link className="link"

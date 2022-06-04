@@ -22,9 +22,18 @@ export default class SignupPage extends React.Component {
   };
 
   handleSubmit = (event) => {
-    let { email, password, username, errors } = this.state;
+    let {
+      email,
+      password,
+      username,
+      errors
+    } = this.state;
     event.preventDefault();
-    if (username && password && email) {
+    if (
+      username
+      && password
+      && email
+    ) {
       fetch(`https://mighty-oasis-08080.herokuapp.com/api/users`, {
         method: 'POST',
         headers: {
@@ -32,7 +41,9 @@ export default class SignupPage extends React.Component {
         },
         body: JSON.stringify({
           user: {
-            username, password, email
+            username,
+            password,
+            email
           }
         }),
       })
@@ -41,29 +52,42 @@ export default class SignupPage extends React.Component {
             return res.json()
               .then((data) => {
                 for (let key in data.errors) {
-                  errors[key] = `${key} ${data.errors[key]}`;
+                  errors[key] =
+                    `${key} ${data.errors[key]}`;
                 }
                 return (errors);
               });
           }
           return res.json();
         })
-        .catch((errors) => this.setState({ errors }));
+        .catch((errors) =>
+          this.setState({ errors }));
     }
   };
 
   render() {
-    let { username, password, email } = this.state.errors;
+    let {
+      username,
+      password,
+      email
+    } = this.state.errors;
     return (
       <>
         <div>
           <div className="signup-header">
-            <h2>Sign Up</h2>
+            <h2>
+              Sign Up
+            </h2>
             <Link className="para" to="/login">
-              <p>Have an account?</p>
+              <p>
+                Have an account?
+              </p>
             </Link>
           </div>
-          <form onSubmit={this.handleSubmit} className="form-signup">
+          <form
+            onSubmit={this.handleSubmit}
+            className="form-signup"
+          >
             <input
               type="text"
               name="username"
@@ -101,7 +125,11 @@ export default class SignupPage extends React.Component {
               name="password"
               onChange={(e) => this.handleChange(e)}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-              title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+              title="Must contain at least
+               one number and 
+               one uppercase and 
+               lowercase letter, and
+               at least 6 or more characters"
               required
             />
             <span>

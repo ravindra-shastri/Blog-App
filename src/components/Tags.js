@@ -1,6 +1,5 @@
 import React from 'react';
 import Loader from "../components/Loader";
-
 export default class Tags extends React.Component {
   constructor(props) {
     super(props);
@@ -14,20 +13,27 @@ export default class Tags extends React.Component {
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/tags`)
       .then((res) => {
         if (!res.ok) {
-          throw new Error(res.statusText);
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
         }
         return res.json();
       })
       .then(({ tags }) => {
-        this.setState({ tags: tags, error: "" });
+        this.setState({
+          tags: tags,
+          error: ""
+        });
       })
       .catch((err) => {
-        this.setState({ error: "Not able to fetch Tags" });
+        this.setState({
+          error: "Not able to fetch Tags"
+        });
       });
   }
 
   selectTag = (tag) => {
-    // console.log(tag)
     this.setState({ selectedtags: tag }, () => {
       this.props.getArticles({ tag });
       this.props.selectedTag(tag)
@@ -37,7 +43,6 @@ export default class Tags extends React.Component {
   render() {
 
     let { tags, error } = this.state;
-
     if (error) {
       return <h4>{error}</h4>;
     }

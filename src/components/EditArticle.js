@@ -36,14 +36,12 @@ export default class EditArticle extends React.Component {
       = this.state;
     event.preventDefault();
     if (title && description && tags && body) {
-
       let c;
       try {
         c = JSON.parse(localStorage.getItem('user'))
       } catch (e) {
         c = {};
       }
-
       const { token = '' } = c || {};
       const { article: { slug = '' } = {} } = this.state;
 
@@ -86,12 +84,46 @@ export default class EditArticle extends React.Component {
     return (
       <form>
         <fieldset className="update-article">
-          <input className="edit-article" type="text" value={title} name="title" placeholder="Article Title" onChange={this.handleChange} />
-          <input className="edit-article" type="text" value={description} name="description" placeholder="What about this article?" onChange={this.handleChange} />
-          <textarea className="edit-article" rows="5" name="body" value={body} placeholder="Write your article" onChange={this.handleChange} ></textarea>
-          <input className="edit-article" type="text" value={tags} name="tags" placeholder="Enter tags" onChange={this.handleChange} />
+          <input
+            className="edit-article"
+            type="text"
+            value={title}
+            name="title"
+            placeholder="Article Title"
+            onChange={this.handleChange}
+          />
+          <input
+            className="edit-article"
+            type="text"
+            value={description}
+            name="description"
+            placeholder="What about this article?"
+            onChange={this.handleChange}
+          />
+          <textarea
+            className="edit-article"
+            rows="5"
+            name="body"
+            value={body}
+            placeholder="Write your article"
+            onChange={this.handleChange}
+          >
+          </textarea>
+          <input
+            className="edit-article"
+            type="text"
+            value={tags}
+            name="tags"
+            placeholder="Enter tags"
+            onChange={this.handleChange}
+          />
           <div className="update-article-btn-content">
-            <input className="update-article-btn" type="submit" value="Update Article"onSubmit={this.handleSubmit} />
+            <input
+              className="update-article-btn"
+              type="submit"
+              value="Update Article"
+              onSubmit={this.handleSubmit}
+            />
           </div>
         </fieldset>
       </form>
