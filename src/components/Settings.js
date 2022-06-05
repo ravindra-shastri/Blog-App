@@ -85,9 +85,9 @@ export default class Settings extends React.Component {
             className="setting-form"
             onSubmit={this.handleSubmit}
           >
-            <legend>
+            <h4>
               Settings
-            </legend>
+            </h4>
             <fieldset className="setting-fieldset">
               <input
                 type="text"

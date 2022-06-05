@@ -145,19 +145,25 @@ code {
 
 .like {
   margin-right: 3.8rem;
+  border-radius: 1rem;
+  cursor: default;
 }
 
 .like-icon:hover {
-  background-color: rgb(85, 211, 85);
   color: white;
+  background-color: rgb(67, 117, 56);
 }
 
 .like-icon {
   font-size: .7rem;
-  border: 1px solid rgb(85, 211, 85);
-  color: rgb(76, 197, 76);
-  border-radius: .4rem;
+  color: white;
+  background-color: rgb(107, 185, 92);
+  border-radius: .3rem;
   padding: .4rem .7rem;
+}
+
+.like-span {
+  color: white;
 }
 
 .author-title {
@@ -465,6 +471,7 @@ code {
   align-items: center;
   flex-direction: column;
   border-radius: .2rem;
+  border: none;
 }
 
 .setting-input {
@@ -486,7 +493,10 @@ code {
 }
 
 .mdeditor {
-  list-style: none;
+  /* list-style-type: none; */
+  color:black;
+  /* margin-top:-25.2rem; */
+  /* table-layout: none; */
 }
 
 .submit-comment {
@@ -554,5 +564,5 @@ code {
 
 .active-fav {
   color: white;
-  /* background-color: rgb(107, 185, 92); */
+  background-color: rgb(107, 185, 92);
 }

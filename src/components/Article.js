@@ -139,7 +139,7 @@ export default class Article extends React.Component {
                 </div>
               </div>
               <hr className="hr-line" />
-              <div className="">
+              <div>
                 {
                   this.state.slug &&
                   <Comments slug={this.state.slug} />

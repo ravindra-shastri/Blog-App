@@ -2,6 +2,7 @@ import React from 'react';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import "../index.css";
+import 'react-markdown-editor-lite/lib/index.css';
 
 export default class AddArticle extends React.Component {
   constructor(props) {
@@ -83,7 +84,7 @@ export default class AddArticle extends React.Component {
 
   handleEditorChange = ({ html, text }) => {
     this.setState({
-      body: text,
+      body: html,
     });
   };
 
@@ -128,7 +129,7 @@ export default class AddArticle extends React.Component {
               className="new-article-input"
             />
             <MdEditor
-              style={{ height: '500px' }}
+              // style={{ height: '500px' }}
               renderHTML={(text) => mdParser.render(text)}
               onChange={(e) => this.handleEditorChange(e)}
               onSubmit={this.clearEdit}

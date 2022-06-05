@@ -189,8 +189,7 @@ export default class Profile extends React.Component {
                 </div>
               </span>
               <span
-                className=
-                {feedSelected === 'favorited'}
+                className={feedSelected === 'favorited' ? 'favorited' : ''}
                 onClick={() =>
                   this.setState({ feedSelected: 'favorited', activePage: 1 },
                     this.getArticlesFeed)}
