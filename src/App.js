@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Article from "./components/Article";
@@ -59,16 +59,66 @@ export default class App extends React.Component {
             : <BrowserRouter>
               <Header />
               <Switch>
-                <Route path="/" exact component={Home}></Route>
-                <Route path="/articles" exact component={Home}></Route>
-                <Route path="/articles/:slug" exact component={Article}></Route>
-                <Route path="/addArticle" exact component={AddArticle}></Route>
-                <Route path="/articles/:slug/edit" exact component={EditArticle}></Route>
-                <Route path="/settings" exact component={Settings}></Route>
-                <Route path="/profiles/:id" exact component={Profile}></Route>
-                <Route path="/login" exact component={Login}></Route>
-                <Route path="/signup" exact component={SignupPage}></Route>
-                <Route path="*" exact component={NotFound}></Route>
+                <Route
+                  path="/"
+                  exact
+                  component={Home}
+                >
+                </Route>
+                <Route
+                  path="/articles"
+                  exact
+                  component={Home}
+                >
+                </Route>
+                <Route
+                  path="/articles/:slug"
+                  exact
+                  component={Article}
+                >
+                </Route>
+                <Route
+                  path="/addArticle"
+                  exact
+                  component={AddArticle}
+                >
+                </Route>
+                <Route
+                  path="/articles/:slug/edit"
+                  exact
+                  component={EditArticle}
+                >
+                </Route>
+                <Route
+                  path="/settings"
+                  exact
+                  component={Settings}
+                >
+                </Route>
+                <Route
+                  path="/profiles/:id"
+                  exact
+                  component={Profile}
+                >
+                </Route>
+                <Route
+                  path="/login"
+                  exact
+                  component={Login}
+                >
+                </Route>
+                <Route
+                  path="/signup"
+                  exact
+                  component={SignupPage}
+                >
+                </Route>
+                <Route
+                  path="*"
+                  exact
+                  component={NotFound}
+                >
+                </Route>
               </Switch>
             </BrowserRouter>
         }
@@ -76,3 +126,7 @@ export default class App extends React.Component {
     )
   }
 }
+
+
+
+
