@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { useContext } from 'react';
-import { UserContext } from './UserContext';
 
-export default class Login extends React.Component {
+export default class LoginUserContext extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +57,7 @@ export default class Login extends React.Component {
         })
     }
   }
-  static contextType = UserContext;
+
   render() {
     let { email, password } = this.state.errors;
     return (
@@ -71,7 +69,7 @@ export default class Login extends React.Component {
               <p>Need an account?</p>
             </Link>
           </div>
-          <form onSubmit={this.context.handleSubmit} className="form-signin">
+          <form onSubmit={this.handleSubmit} className="form-signin">
             <input
               type="email"
               className="input"
@@ -81,7 +79,7 @@ export default class Login extends React.Component {
               id="email"
               placeholder="Email"
               value={this.state.email}
-              onChange={(e) => this.context.handleChange(e)}
+              onChange={(e) => this.handleChange(e)}
               required
             />
             <span>
@@ -98,7 +96,7 @@ export default class Login extends React.Component {
               title="Must contain at least one number
                and one uppercase and lowercase letter,
                 and at least 6 or more characters"
-              onChange={(e) => this.context.handleChange(e)}
+              onChange={(e) => this.handleChange(e)}
               required />
             <span>
               {password}

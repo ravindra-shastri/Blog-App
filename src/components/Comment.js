@@ -1,4 +1,6 @@
 import React from 'react';
+// import { UserContext } from './UserContext';
+
 
 export default class Comment extends React.Component {
 
@@ -6,6 +8,7 @@ export default class Comment extends React.Component {
     let newDate = new Date(date).toISOString().split('T')[0];
     return newDate;
   }
+  // static contextType = UserContext;
 
   render() {
     let comments = this.props.comments;

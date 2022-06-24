@@ -136,7 +136,9 @@ export default class Article extends React.Component {
               <div className="">
                 {
                   this.state.slug &&
-                  <Comments slug={this.state.slug} />
+                  <Comments
+                    slug={this.state.slug}
+                  />
                 }
               </div>
             </div>

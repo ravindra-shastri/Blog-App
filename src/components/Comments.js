@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from './Comment';
+// import { UserContext } from './UserContext';
 export default class Comments extends React.Component {
   constructor(props) {
     super(props);
@@ -109,9 +110,13 @@ export default class Comments extends React.Component {
       })
       .catch((err) => console.log(err));
   };
+  // static contextType = UserContext;
 
   render() {
-    let { inputText, comments } = this.state;
+    let {
+       inputText,
+        comments 
+      } = this.state;
     return (
       <>
         <div>
