@@ -11,6 +11,12 @@ You will find all the information you will need to work on this project in the `
 
 #### Features
 
+- User can add and delete an article
+
+- User can like and comment on the
+  article
+
+- Need Id and password for login
 
 
 ## Build/Run
