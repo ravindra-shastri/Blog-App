@@ -1,8 +1,8 @@
 <h1> Blog App</h1>
 
-<!-- ## [Live Demo](https://react-shopping-cart-beta.vercel.app/) -->
+## [Live Demo](https://ac-blog-app.vercel.app/)
 
-This is a simple Blog app.
+This is a Blog app.
 
 # Getting Started with Create React App
 
