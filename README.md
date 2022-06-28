@@ -1,6 +1,6 @@
 <h1> Blog App</h1>
 
-## [Live Demo](https://ac-blog-app.vercel.app/)
+## [Live Demo](https://blog-app-six-tawny.vercel.app/)
 
 This is a Blog app.
 
