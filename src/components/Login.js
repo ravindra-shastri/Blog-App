@@ -45,7 +45,6 @@ export default class Login extends React.Component {
           return res.json();
         })
         .then(({ user }) => {
-          // console.log(user, "login");
           localStorage.setItem('user', JSON.stringify(user));
           this.setState({
             password: "",
@@ -64,16 +63,26 @@ export default class Login extends React.Component {
       <>
         <div>
           <div className="signin-header">
-            <h2>Sign In</h2>
-            <Link className="para" to="/signup">
-              <p>Need an account?</p>
+            <h2>
+              Sign In
+            </h2>
+            <Link
+              className="para"
+              to="/signup"
+            >
+              <p>
+                Need an account?
+              </p>
             </Link>
           </div>
-          <form onSubmit={this.handleSubmit} className="form-signin">
+          <form
+            onSubmit={this.handleSubmit}
+            className="form-signin"
+          >
             <input
               type="email"
               className="input"
-              pattern=" [/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/],
+              pattern="[/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/],
              'Please enter a valid email address'"
               name="email"
               id="email"

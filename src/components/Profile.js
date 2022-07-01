@@ -22,7 +22,6 @@ export default class Profile extends React.Component {
 
   getProfile = ({ username = "" } = {}) => {
     this.setState({ loading: true });
-
     let c;
     try {
       c = JSON.parse(localStorage.getItem('user'))
@@ -30,7 +29,6 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}`,
       {
         method: 'GET',
@@ -50,20 +48,8 @@ export default class Profile extends React.Component {
     this.getProfile({ username: id });
   }
 
-  handleClick = ({ target }) => {
-    let { id } = target.dataset;
-    this.setState({ activePage: id }, this.getArticlesFeed)
-  };
-
-  updateCurrentPage = (index) => {
-    this.setState({ activePage: index }, this.getArticlesFeed);
-  };
-
-
   getArticlesFeed = ({ username = "" } = {}) => {
     this.setState({ username: this.state.user });
-    // console.log(username)
-    // let { username } = this.state.user;
     let offset = (this.state.activePage - 1) * 10;
     let c;
     try {
@@ -72,8 +58,8 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?${this.state.feedSelected}=${username}&
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?
+    ${this.state.feedSelected}=${username}&
     limit=${this.state.articlesPerPage}&offset=${offset}`,
       {
         method: 'GET',
@@ -99,14 +85,26 @@ export default class Profile extends React.Component {
         });
       })
       .catch((err) => {
-        this.setState({ error: 'Not able to fetch Articles' });
+        this.setState({
+          error: 'Not able to fetch Articles'
+        });
       });
+  };
+
+  handleClick = ({ target }) => {
+    let { id } = target.dataset;
+    this.setState({ activePage: id },
+      this.getArticlesFeed)
+  };
+
+  updateCurrentPage = (index) => {
+    this.setState({ activePage: index },
+      this.getArticlesFeed);
   };
 
   handleFollow = () => {
     let { username, following } = this.state.profile;
     let method = following ? 'DELETE' : 'POST';
-
     let c;
     try {
       c = JSON.parse(localStorage.getItem('user'))
@@ -114,7 +112,6 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}/follow`, {
       method: method,
       headers: {
@@ -136,50 +133,20 @@ export default class Profile extends React.Component {
       .catch((err) => console.log(err));
   };
 
-  handleFavorite = ({ target }) => {
-    let { id, slug } = target.dataset;
-    console.log(slug);
-    let method = id ? 'DELETE' : 'POST';
-    
-    let c;
-    try {
-      c = JSON.parse(localStorage.getItem('user'))
-    } catch (e) {
-      c = {};
-    }
-    const { token = '' } = c || {};
-
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
-      method: method,
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          return res.json()
-            .then(({ errors }) => {
-              return (errors);
-            });
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.getArticlesFeed();
-      })
-      .catch((err) => console.log(err));
-  };
-
   render() {
     let profile = this.state.profile;
-    let { articles, articlesCount, articlesPerPage, activePage,
-      feedSelected, error } = this.state;
+    let { articles, articlesCount, articlesPerPage,
+      activePage, feedSelected, error } = this.state;
     return (
       <>
         <div>
           <header className="profile-header">
             <div>
-              <img className="profile-img" src={profile.image} alt={profile.username} />
+              <img
+                className="profile-img"
+                src={profile.image}
+                alt={profile.username}
+              />
             </div>
             <div className="profile-user">
               {profile.username}
@@ -188,28 +155,45 @@ export default class Profile extends React.Component {
               {profile.bio}
             </div>
             <div className="edit-profile">
-              <button onClick={this.handleFollow}>
-                <i className={!profile.following ? "fas fa-plus mr-2" : "fas fa-minus mr-2"}></i>  {!profile.following ? 'follow' : 'unfollow '}  {profile.username}
+              <button
+                onClick={this.handleFollow}
+              >
+                <i
+                  className={!profile.following ?
+                    "fas fa-plus mr-2" : "fas fa-minus mr-2"}
+                >
+                </i>
+                {!profile.following ? 'follow' : 'unfollow '}
+                {profile.username}
               </button>
             </div>
           </header>
           <div className="edit-profile">
             <Link to="/settings">
               <button>
-                <i className="fas fa-user-edit mr-2"></i>  Edit Profile
+                <i className="fas fa-user-edit mr-2"></i>
+                Edit Profile
               </button>
             </Link>
           </div>
-          <article>
+          <article className="profile-article">
             <div>
-              <span className={feedSelected === 'author' ? "active" : ""}
-                onClick={() => this.setState({ feedSelected: 'author', activePage: 1 },
-                  this.getArticlesFeed)}>
+              <span
+                className=
+                {feedSelected === 'author' ? "active" : ""}
+                onClick={() =>
+                  this.setState({ feedSelected: 'author', activePage: 1 },
+                    this.getArticlesFeed)}>
                 <div className="feed">
                   My Article
                 </div>
               </span>
-              <span className={feedSelected === 'favorited'} onClick={() => this.setState({ feedSelected: 'favorited', activePage: 1 }, this.getArticlesFeed)}>
+              <span
+                className={feedSelected === 'favorited' ? 'favorited' : ''}
+                onClick={() =>
+                  this.setState({ feedSelected: 'favorited', activePage: 1 },
+                    this.getArticlesFeed)}
+              >
                 <div className="feed" to="/">
                   Favorited Articles
                 </div>
@@ -219,7 +203,6 @@ export default class Profile extends React.Component {
               <UserArticle
                 articles={articles}
                 error={error}
-                handleFavorite={this.handleFavorite}
                 {...this.props}
               />
             </div>

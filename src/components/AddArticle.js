@@ -2,6 +2,7 @@ import React from 'react';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import "../index.css";
+import 'react-markdown-editor-lite/lib/index.css';
 
 export default class AddArticle extends React.Component {
   constructor(props) {
@@ -25,16 +26,13 @@ export default class AddArticle extends React.Component {
     tags = tags.split(',').map((tag) => tag.trim());
     event.preventDefault();
     if (title && description && tags && body) {
-      // let slug = this.props.slug;
       let c;
       try {
         c = JSON.parse(localStorage.getItem('user'))
       } catch (e) {
         c = {};
       }
-
       const { token = '' } = c || {};
-
       fetch("https://mighty-oasis-08080.herokuapp.com/api/articles", {
         method: 'POST',
         headers: {
@@ -42,7 +40,13 @@ export default class AddArticle extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          article: { title, description, tagList: tags, body },
+          article: {
+            title,
+            description,
+            body,
+            tagList: tags
+
+          },
         }),
       })
         .then((res) => {
@@ -80,7 +84,7 @@ export default class AddArticle extends React.Component {
 
   handleEditorChange = ({ html, text }) => {
     this.setState({
-      body: text,
+      body: html,
     });
   };
 
@@ -93,8 +97,13 @@ export default class AddArticle extends React.Component {
     return (
       <>
         <div>
-          <h2 className="new-article-header"> Add New Article </h2>
-          <form onSubmit={this.handleSubmit} className="new-article-container">
+          <h2 className="new-article-header">
+            Add New Article
+          </h2>
+          <form
+            onSubmit={this.handleSubmit}
+            className="new-article-container"
+          >
             <input
               type="text"
               placeholder="Enter your Title"
@@ -120,7 +129,7 @@ export default class AddArticle extends React.Component {
               className="new-article-input"
             />
             <MdEditor
-              style={{ height: '500px' }}
+              // style={{ height: '500px' }}
               renderHTML={(text) => mdParser.render(text)}
               onChange={(e) => this.handleEditorChange(e)}
               onSubmit={this.clearEdit}

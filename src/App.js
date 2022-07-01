@@ -39,7 +39,14 @@ export default class App extends React.Component {
     })
       .then((res) => res.json())
       .then(data => {
-        if (data.errors && window.location.pathname !== '/login' && window.location.pathname !== '/signup') return window.location.href = '/login';
+        if (
+          data.errors
+          && window.location.pathname !==
+          '/login'
+          && window.location.pathname !==
+          '/signup')
+          return window.location.href =
+            '/login';
         else
           localStorage.setItem('user', JSON.stringify(data.user));
       })

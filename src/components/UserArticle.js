@@ -1,8 +1,6 @@
-import React from 'react';  
+import React from 'react';
 import { Link } from 'react-router-dom';
-// let articleURL = "https://mighty-oasis-08080.herokuapp.com/api/";
-
-export default class Article extends React.Component {
+export default class UserArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,15 +10,27 @@ export default class Article extends React.Component {
     }
   }
 
-  getArticle = ({ id: userId = '' } = {}) => {
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?author=${userId}`)
+  getArticle = () => {
+    const { params: { id: userId } = {} } = this.props.match || {};
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?author=${userId}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then(({ articles }) => this.setState({ articles }))
   }
 
   componentDidMount() {
-    const { params } = this.props.match || {};
-    this.getArticle(params)
+    this.getArticle()
   }
 
   getDate(date) {
@@ -34,11 +44,39 @@ export default class Article extends React.Component {
     })
   }
 
+  handleFavorite = (article) => {
+    const { slug, favorited } = article;
+    let method = favorited ? 'DELETE' : 'POST';
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+      method: method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return this.getArticle()
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <>
         {this.state.articles.map((article) =>
-          <div className="author-container">
+          <div className="author-container" key={article.slug}>
             <div className="author-img-container">
               <div>
                 <Link className="link"
@@ -63,9 +101,12 @@ export default class Article extends React.Component {
                   </button>
                 </Link>
               </div>
-              <p className="like" onClick={this.props.handleFavorite}>
+              <p
+                className="like"
+                onClick={() => this.handleFavorite(article)}
+              >
                 <i className="fa-solid fa-heart like-icon">
-                </i>
+                  <span className="like-span"> {article.favoritesCount}</span></i>
               </p>
             </div>
             <Link className="link"

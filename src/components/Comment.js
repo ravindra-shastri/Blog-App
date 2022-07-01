@@ -1,15 +1,11 @@
 import React from 'react';
-
 export default class Comment extends React.Component {
-
   getDate = (date) => {
     let newDate = new Date(date).toISOString().split('T')[0];
     return newDate;
   }
-
   render() {
     let comments = this.props.comments;
-
     return (
       <>
         <div>
@@ -23,23 +19,32 @@ export default class Comment extends React.Component {
                     />
                   </div>
                   <div>
-                    <h3>{comment.author.username}</h3>
-                    <h3>{comment.createdAt}</h3>
+                    <h3>
+                      {comment.author.username}
+                    </h3>
+                    <h3>
+                      {comment.createdAt}
+                    </h3>
                   </div>
                   <div>
                     <button
                       onClick={(e) => this.props.handleDelete(comment.id)}
                     >
-                      <i className="fa-solid fa-trash-can"></i>
+                      <i className="fa-solid fa-trash-can">
+                      </i>
                     </button>
                   </div>
-                  <p>{comment.body}</p>
+                  <p>
+                    {comment.body}
+                  </p>
                 </div>
               )
             })
           ) :
             <div className="no-comment">
-              < h2 className="no-comment-msg" > No comments yet</h2>
+              < h2 className="no-comment-msg" >
+                No comments yet
+              </h2>
             </div>
           }
         </div>

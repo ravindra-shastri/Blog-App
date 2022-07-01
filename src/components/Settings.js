@@ -1,6 +1,4 @@
 import React from 'react';
-// import Loader from "./Loader";
-
 export default class Settings extends React.Component {
   constructor(props) {
     super(props);
@@ -25,25 +23,42 @@ export default class Settings extends React.Component {
   };
 
   handleSubmit = (event) => {
-    let { username, image, password, email, bio, errors } = this.state;
+    let {
+      username,
+      image,
+      password,
+      email,
+      bio,
+      errors
+    } = this.state;
     event.preventDefault();
-    if (username && image && password && email && bio) {
+    if (username
+      && image
+      && password
+      && email
+      && bio) {
       fetch("https://mighty-oasis-08080.herokuapp.com/api/user", {
         method: 'PUT',
         body: JSON.stringify({
-          user: { username, email, password, bio, image }
+          user: {
+            username,
+            email,
+            password,
+            bio,
+            image
+          }
         }),
         headers: {
           'Content-Type': 'application/json',
         },
       })
         .then((res) => {
-          // console.log(res);
           if (!res.ok) {
             return res.json()
               .then((data) => {
                 for (let key in data.errors) {
-                  errors[key] = `${key} ${data.errors[key]}`;
+                  errors[key] =
+                    `${key} ${data.errors[key]}`;
                 }
                 return ({ errors });
               });
@@ -58,18 +73,21 @@ export default class Settings extends React.Component {
   }
 
   render() {
-    // if (!this.state.username) {
-    //   return <Loader />
-    // }
-
-    let { username, email, password } = this.state.errors;
+    let {
+      username,
+      email,
+      password
+    } = this.state.errors;
     return (
       <>
         <div>
-          <form className="setting-form" onSubmit={this.handleSubmit}>
-            <legend>
+          <form
+            className="setting-form"
+            onSubmit={this.handleSubmit}
+          >
+            <h4>
               Settings
-            </legend>
+            </h4>
             <fieldset className="setting-fieldset">
               <input
                 type="text"

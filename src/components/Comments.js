@@ -10,7 +10,6 @@ export default class Comments extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.getComments();
   }
 
@@ -25,7 +24,6 @@ export default class Comments extends React.Component {
     event.preventDefault();
     let slug = this.props.slug;
     let { inputText } = this.state;
-
     if (inputText) {
       let c;
       try {
@@ -33,7 +31,6 @@ export default class Comments extends React.Component {
       } catch (e) {
         c = {};
       }
-
       const { token = '' } = c || {};
 
       fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments`, {
@@ -55,7 +52,8 @@ export default class Comments extends React.Component {
         })
         .then((data) => {
           console.log(data);
-          this.setState({ inputText: '', comments: '' }, this.getComments);
+          this.setState({ inputText: '', comments: '' },
+            this.getComments);
         })
         .catch((err) => console.log(err));
     }
@@ -69,9 +67,7 @@ export default class Comments extends React.Component {
     } catch (e) {
       c = {};
     }
-
     const { token = '' } = c || {};
-
     fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments/${id}`, {
       method: 'DELETE',
       headers: {
@@ -86,7 +82,8 @@ export default class Comments extends React.Component {
               return (errors);
             });
         }
-        this.setState({ comments: '' }, this.getComments);
+        this.setState({ comments: '' },
+          this.getComments);
       })
       .catch((err) => console.log(err));
   };

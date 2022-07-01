@@ -2,9 +2,7 @@ import React from 'react';
 import Tags from "../components/Tags";
 import ArticlePagination from "./ArticlePagination";
 import { Link } from 'react-router-dom';
-
 const LIMIT = 10;
-
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +17,20 @@ export default class Home extends React.Component {
   getArticles = ({ tag = '' } = {}) => {
     const { activePage = 1 } = this.state || {};
     const offset = tag ? 0 : ((activePage - 1) * LIMIT);
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?limit=${LIMIT}&offset=${offset}${tag ? `&tag=${tag}` : ''}`)
+
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?limit=${LIMIT}
+    &offset=${offset}${tag ? `&tag=${tag}` : ''}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    })
       .then((res) => res.json())
       .then(({ articles, articlesCount }) =>
         this.setState({ articles, articlesCount }))
@@ -37,13 +48,46 @@ export default class Home extends React.Component {
   handleCurrentPage = (index) => {
     this.setState({
       activePage: index
-    }, this.getArticles)
+    },
+      this.getArticles
+    )
   }
+
+  handleFavorite = (article) => {
+    const { slug, favorited } = article;
+
+    let method = favorited ? 'DELETE' : 'POST';
+    let c;
+    try {
+      c = JSON.parse(localStorage.getItem('user'))
+    } catch (e) {
+      c = {};
+    }
+    const { token = '' } = c || {};
+
+    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+      method: method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return res.json()
+            .then(({ errors }) => {
+              return (errors);
+            });
+        }
+        return this.getArticles()
+      })
+      .catch((err) => console.log(err));
+  };
 
   removeTag = () => {
     this.setState({ activetag: "" })
   }
-  selectedTag = activetag => this.setState({ activetag })
+  selectedTag = activetag =>
+    this.setState({ activetag })
 
   render() {
     return (
@@ -99,9 +143,12 @@ export default class Home extends React.Component {
                       </button>
                     </Link>
                   </div>
-                  <p className="like">
+                  <p
+                    className="like"
+                    onClick={() => this.handleFavorite(article)}
+                  >
                     <i className="fa-solid fa-heart like-icon">
-                    </i>
+                      <span className="like-span"> {article.favoritesCount}</span></i>
                   </p>
                 </div>
                 <Link className="link"
@@ -132,7 +179,10 @@ export default class Home extends React.Component {
             }
           </div>
           <div>
-            <Tags getArticles={this.getArticles} selectedTag={this.selectedTag} />
+            <Tags
+              getArticles={this.getArticles}
+              selectedTag={this.selectedTag}
+            />
           </div>
         </div>
 
