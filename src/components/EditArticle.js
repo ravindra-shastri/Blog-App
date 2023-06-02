@@ -9,7 +9,7 @@ export default class EditArticle extends React.Component {
   }
 
   getArticle = ({ slug = '' } = {}) => {
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}`)
       .then((res) => res.json())
       .then(({ article }) => this.setState({ article }))
   }
@@ -45,7 +45,7 @@ export default class EditArticle extends React.Component {
       const { token = '' } = c || {};
       const { article: { slug = '' } = {} } = this.state;
 
-      fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}`, {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}`, {
         method: 'PUT',
         body: JSON.stringify({
           article: {

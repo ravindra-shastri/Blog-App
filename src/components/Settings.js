@@ -37,7 +37,7 @@ export default class Settings extends React.Component {
       && password
       && email
       && bio) {
-      fetch("https://mighty-oasis-08080.herokuapp.com/api/user", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/user`, {
         method: 'PUT',
         body: JSON.stringify({
           user: {

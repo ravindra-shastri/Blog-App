@@ -34,7 +34,7 @@ export default class SignupPage extends React.Component {
       && password
       && email
     ) {
-      fetch(`https://mighty-oasis-08080.herokuapp.com/api/users`, {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/users`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

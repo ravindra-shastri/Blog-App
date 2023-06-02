@@ -33,7 +33,7 @@ export default class AddArticle extends React.Component {
         c = {};
       }
       const { token = '' } = c || {};
-      fetch("https://mighty-oasis-08080.herokuapp.com/api/articles", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/articles`, {
         method: 'POST',
         headers: {
           Authorization: `Token ${token}`,

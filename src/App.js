@@ -32,7 +32,7 @@ export default class App extends React.Component {
     }
     const { token = '' } = d || {};
 
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/user`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/user`, {
       headers: {
         Authorization: `Token ${token}`
       }

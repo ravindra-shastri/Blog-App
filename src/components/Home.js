@@ -25,7 +25,7 @@ export default class Home extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?limit=${LIMIT}
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles?limit=${LIMIT}
     &offset=${offset}${tag ? `&tag=${tag}` : ''}`, {
       headers: {
         Authorization: `Token ${token}`,
@@ -65,7 +65,7 @@ export default class Home extends React.Component {
     }
     const { token = '' } = c || {};
 
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}/favorite`, {
       method: method,
       headers: {
         Authorization: `Token ${token}`,

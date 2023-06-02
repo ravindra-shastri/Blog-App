@@ -29,7 +29,7 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}`,
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/profiles/${username}`,
       {
         method: 'GET',
         headers: {
@@ -58,7 +58,7 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles?
     ${this.state.feedSelected}=${username}&
     limit=${this.state.articlesPerPage}&offset=${offset}`,
       {
@@ -112,7 +112,7 @@ export default class Profile extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/profiles/${username}/follow`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/profiles/${username}/follow`, {
       method: method,
       headers: {
         Authorization: `Token ${token}`,

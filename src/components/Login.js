@@ -24,7 +24,7 @@ export default class Login extends React.Component {
     let { email, password } = this.state
     event.preventDefault();
     if (password && email) {
-      fetch(`https://mighty-oasis-08080.herokuapp.com/api/users/login`, {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

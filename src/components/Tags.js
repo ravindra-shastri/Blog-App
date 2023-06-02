@@ -10,7 +10,7 @@ export default class Tags extends React.Component {
     }
   }
   componentDidMount() {
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/tags`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/tags`)
       .then((res) => {
         if (!res.ok) {
           return res.json()

@@ -20,7 +20,7 @@ export default class UserArticle extends React.Component {
     }
     const { token = '' } = c || {};
 
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles?author=${userId}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles?author=${userId}`, {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -54,7 +54,7 @@ export default class UserArticle extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/favorite`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}/favorite`, {
       method: method,
       headers: {
         Authorization: `Token ${token}`,

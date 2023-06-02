@@ -33,7 +33,7 @@ export default class Comments extends React.Component {
       }
       const { token = '' } = c || {};
 
-      fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments`, {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}/comments`, {
         method: 'POST',
         body: JSON.stringify({ comment: { body: inputText } }),
         headers: {
@@ -68,7 +68,7 @@ export default class Comments extends React.Component {
       c = {};
     }
     const { token = '' } = c || {};
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments/${id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}/comments/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`,
@@ -90,7 +90,7 @@ export default class Comments extends React.Component {
 
   getComments = () => {
     let slug = this.props.slug;
-    fetch(`https://mighty-oasis-08080.herokuapp.com/api/articles/${slug}/comments`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/articles/${slug}/comments`)
       .then((res) => {
         if (!res.ok) {
           return res.json()
